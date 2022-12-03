@@ -49,18 +49,17 @@ const counter = container.get(CounterStore);
 
 #### Motivation
 
-Valtio already offers [several simple recipes](https://github.com/pmndrs/valtio#recipes) for organizing actions, persisting state, and composing states.
+This library builds on top of the officially documented pattern for [using classes](https://github.com/pmndrs/valtio/wiki/How-to-organize-actions#using-class) as stores (to organize actions).
 
-This library provides a comprehensive and opinionated solution on top valtio for creating "stores" (state + actions) using the factory pattern. Specifically, it simplifies the following things:
+valtio-inversify enables an object-oriented approach to state management and aims to
+make state management code more maintainable and testable.
 
-- Separation of store declaration and initialization
-- Initializing stores from external data sources (e.g. local storage, async storage)
-- Declaring actions and binding them to state
-- Declaring derived state and subscriptions
-- Injecting dependencies into actions and other state-dependent logic with [context](#use-context)
-- Composing multiple stores
+For instance, external dependencies like API clients can simply be injected into stores
+with the help of inversify.
 
-valtio-inversify was partially inspired by [MobX-State-Tree](https://mobx-state-tree.js.org/intro/welcome).
+valtio-inversify was inspired by the work on [valtio-factory](http://github.com/mfellner/valtio-factory). If using Inversify is not an option for your own use case,
+perhaps valtio-factory would be a better fit as it aims to solve similar problems
+as this library.
 
 ### Define actions
 
