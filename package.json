@@ -1,0 +1,83 @@
+{
+  "name": "@mfellner/valtio-inversify",
+  "version": "0.0.0",
+  "description": "Create class-based valtio stores with inversify.",
+  "author": "Maximilian Fellner <mail@mfellner.eu>",
+  "repository": "https://github.com/mfellner/valtio-inversify",
+  "keywords": [
+    "valtio",
+    "inversify",
+    "inject",
+    "injection",
+    "ioc",
+    "react",
+    "state",
+    "proxy",
+    "store"
+  ],
+  "license": "MIT",
+  "source": "lib/index.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.mjs",
+  "types": "dist/types.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "start": "parcel --dist-dir build example/index.html",
+    "build": "parcel build",
+    "clean": "rm -rf dist/ .parcel-cache/",
+    "test": "jest",
+    "typecheck": "yarn tsc -p tsconfig.json --noEmit",
+    "release": "release-it",
+    "prepare": "husky install",
+    "reinstall": "rm -rf node_modules yarn.lock && yarn install"
+  },
+  "lint-staged": {
+    ".ts": "eslint --fix"
+  },
+  "peerDependencies": {
+    "inversify": "*",
+    "reflect-metadata": "*",
+    "valtio": ">=1.7.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
+    "@parcel/packager-ts": "2.8.0",
+    "@parcel/transformer-typescript-types": "2.8.0",
+    "@release-it/conventional-changelog": "5.1.1",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "13.4.0",
+    "@types/jest": "29.2.3",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.9",
+    "@typescript-eslint/eslint-plugin": "5.45.0",
+    "@typescript-eslint/parser": "5.45.0",
+    "eslint": "8.29.0",
+    "eslint-plugin-valtio": "0.6.1",
+    "husky": "8.0.2",
+    "inversify": "6.0.1",
+    "jest": "29.3.1",
+    "jest-environment-jsdom": "29.3.1",
+    "jest-runner-eslint": "1.1.0",
+    "lint-staged": "13.0.4",
+    "parcel": "2.8.0",
+    "process": "^0.11.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "reflect-metadata": "0.1.13",
+    "release-it": "15.5.1",
+    "ts-jest": "29.0.3",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.3",
+    "valtio": "1.7.6"
+  }
+}
