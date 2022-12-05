@@ -198,3 +198,4 @@ Temporary Items
 lib/**/*.js
 index.js
 build/
+!css.d.ts

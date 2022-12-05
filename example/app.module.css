@@ -1,0 +1,19 @@
+.list {
+  list-style-type: none;
+  padding: 0px;
+  display: flex;
+  max-width: 700px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+ul.list li {
+  display: inline-block;
+  position: relative;
+}
+
+ul.list li > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
