@@ -1,5 +1,5 @@
-import { Container, injectable } from "inversify";
-import { valtioProxyMiddleware, derived, subscribe, valtio } from "./";
+import { Container, inject, injectable } from "inversify";
+import { derived, subscribe, valtio, valtioProxyMiddleware } from "./";
 
 describe("valtio-inversify", () => {
   const container = new Container();
@@ -65,6 +65,43 @@ describe("valtio-inversify", () => {
       state.increment();
       state.increment();
       expect(state.count).toBe(2);
+      expect(onUpdate).toHaveBeenCalledTimes(2);
+      expect(onUpdate).toHaveBeenNthCalledWith(1, 1);
+      expect(onUpdate).toHaveBeenNthCalledWith(2, 2);
+    });
+
+    test("subscribe inside nested proxy", () => {
+      const onUpdate = jest.fn();
+
+      @valtio()
+      @injectable()
+      class NestedStore {
+        count = 0;
+
+        increment() {
+          this.count += 1;
+        }
+
+        @subscribe({ notifyInSync: true })
+        subscribe() {
+          onUpdate(this.count);
+        }
+      }
+
+      @valtio()
+      @injectable()
+      class MyStore {
+        constructor(@inject(NestedStore) readonly nestedStore: NestedStore) {}
+      }
+
+      container.bind(NestedStore).toSelf();
+      container.bind(MyStore).toSelf();
+      const state = container.get(MyStore);
+
+      expect(state.nestedStore.count).toBe(0);
+      state.nestedStore.increment();
+      state.nestedStore.increment();
+      expect(state.nestedStore.count).toBe(2);
       expect(onUpdate).toHaveBeenCalledTimes(2);
       expect(onUpdate).toHaveBeenNthCalledWith(1, 1);
       expect(onUpdate).toHaveBeenNthCalledWith(2, 2);

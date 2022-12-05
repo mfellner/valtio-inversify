@@ -24,28 +24,32 @@ function isValtioStoreClass(identifier: unknown): identifier is ValtioStore {
 export function valtioProxyMiddleware(
   planAndResolve: interfaces.Next,
 ): interfaces.Next {
-  return (args: interfaces.NextArgs) => {
-    const result = planAndResolve(args);
+  return (args: interfaces.NextArgs) => proxyfy(planAndResolve(args));
+}
 
-    if (isValtioStoreClass(args.serviceIdentifier)) {
-      const p = proxy(result);
+function proxyfy<T extends object>(value: T): T {
+  if (value === null || !isValtioStoreClass(value.constructor)) {
+    return value;
+  }
+  for (const [k, v] of Object.entries(value)) {
+    value[k as keyof T] = proxyfy(v);
+  }
 
-      // Inspect static class properties
-      for (const [name, descriptor] of Object.entries(
-        Object.getOwnPropertyDescriptors(args.serviceIdentifier),
-      )) {
-        handleProperty(p, name, descriptor);
-      }
-      // Inspect instance properties
-      for (const [name, descriptor] of Object.entries(
-        Object.getOwnPropertyDescriptors(Object.getPrototypeOf(result)),
-      )) {
-        handleProperty(p, name, descriptor);
-      }
-      return p;
-    }
-    return result;
-  };
+  const p = proxy(value);
+
+  // Inspect static class properties
+  for (const [name, descriptor] of Object.entries(
+    Object.getOwnPropertyDescriptors(value.constructor),
+  )) {
+    handleProperty(p, name, descriptor);
+  }
+  // Inspect instance properties
+  for (const [name, descriptor] of Object.entries(
+    Object.getOwnPropertyDescriptors(Object.getPrototypeOf(value)),
+  )) {
+    handleProperty(p, name, descriptor);
+  }
+  return p;
 }
 
 function handleProperty(
