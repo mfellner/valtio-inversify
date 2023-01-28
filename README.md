@@ -1,6 +1,6 @@
 # valtio-inversify 🪬 <!-- omit in toc -->
 
-[![Build Status](https://img.shields.io/github/workflow/status/mfellner/valtio-inversify/test?style=flat&colorA=000000&colorB=000000)](https://github.com/mfellner/valtio-inversify/actions?query=workflow%3Atest)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/mfellner/valtio-inversify/test.yml?style=flat&colorA=000000&colorB=000000)](https://github.com/mfellner/valtio-inversify/actions?query=workflow%3Atest)
 [![Codecov](https://img.shields.io/codecov/c/github/mfellner/valtio-inversify?colorA=000000&colorB=000000)](https://app.codecov.io/gh/mfellner/valtio-inversify)
 [![Build Size](https://img.shields.io/bundlephobia/minzip/@mfellner/valtio-inversify?label=bundle%20size&style=flat&colorA=000000&colorB=000000)](https://bundlephobia.com/result?p=@mfellner/valtio-inversify)
 [![Version](https://img.shields.io/npm/v/@mfellner/valtio-inversify?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/@mfellner/valtio-inversify)
