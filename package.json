@@ -1,6 +1,6 @@
 {
   "name": "@mfellner/valtio-inversify",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "Create class-based valtio stores with inversify.",
   "author": "Maximilian Fellner <mail@mfellner.eu>",
   "repository": "https://github.com/mfellner/valtio-inversify",
